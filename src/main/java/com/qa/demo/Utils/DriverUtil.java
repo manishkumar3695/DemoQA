@@ -3,11 +3,14 @@ package com.qa.demo.Utils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
 
 import java.util.HashMap;
+
 import static com.qa.demo.Utils.FrameworkUtil.getConfig;
+import static org.openqa.selenium.remote.DesiredCapabilities.chrome;
 
 public class DriverUtil {
     private static HashMap<String, WebDriver> drivermap;
@@ -37,12 +40,13 @@ public class DriverUtil {
                 }
 
                 if (browser.equalsIgnoreCase("CHROME")) {
-                        WebDriverManager.chromedriver().setup();
-                    WebDriver driver = new ChromeDriver();
+                    ChromeOptions o = new ChromeOptions();
+                    o.addArguments("--no-sandbox");
+                    WebDriverManager.chromedriver().setup();
+                    WebDriver driver = new ChromeDriver(o);
                     drivermap.put(tID, driver);
 
-                }
-                else if (browser.equalsIgnoreCase("Fire")) {
+                } else if (browser.equalsIgnoreCase("Fire")) {
                     WebDriverManager.firefoxdriver().setup();
                     WebDriver driver = new FirefoxDriver();
                     drivermap.put(tID, driver);
