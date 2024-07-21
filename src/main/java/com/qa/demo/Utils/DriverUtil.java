@@ -42,6 +42,8 @@ public class DriverUtil {
                 if (browser.equalsIgnoreCase("CHROME")) {
                     ChromeOptions o = new ChromeOptions();
                     o.addArguments("--no-sandbox");
+                    o.addArguments("--headless");
+                    //o.setBinary("/opt/google");
                     WebDriverManager.chromedriver().setup();
                     WebDriver driver = new ChromeDriver(o);
                     drivermap.put(tID, driver);
